@@ -1,4 +1,5 @@
 require "net/https"
+require "openssl"
 require "cgi"
 require "logger"
 
@@ -23,16 +24,22 @@ class PaypalNVP
       @url  = config[type]["url"]
       @user = config[type]["user"]
       @pass = config[type]["pass"]
-      @cert = config[type]["cert"]
+      @signature = config[type]["signature"]
+      @key_path = config[type]["key_path"]
+      @cert_path = config[type]["cert_path"]
       @rootCA = config[type]["rootca"]
       @open_timeout = config[type]["open_timeout"]
       @read_timeout = config[type]["read_timeout"]
     else
-      @url  = extras[:url]
-      @user = extras[:user]
-      @pass = extras[:pass]
-      @cert = extras[:cert]
-      @rootCA = extras[:rootca]
+      @url  = extras.delete(:url)
+      @user = extras.delete(:user)
+      @pass = extras.delete(:pass)
+      @signature = extras.delete(:signature)
+      @rootCA = extras.delete(:rootca)
+
+      @key_path = extras.delete(:key_path)
+      @cert_path = extras.delete(:cert_path)
+
       @open_timeout = extras.delete(:open_timeout)
       @read_timeout = extras.delete(:read_timeout)
     end
@@ -46,10 +53,13 @@ class PaypalNVP
   end
 
   def call_paypal(data)
-    # items in the data hash should take precedence over preconfigured values, 
+    # items in the data hash should take precedence over preconfigured values,
     # to allow for maximum flexibility:
     params = @extras.dup
-    params.merge!({ "USER" => @user, "PWD" => @pass, "SIGNATURE" => @cert })
+    params.merge!({ "USER" => @user, "PWD" => @pass })
+
+    # Signature authentication
+    params.merge!({ "SIGNATURE" => @signature }) if @signature
     params.merge!(data)
     qs = []
     params.each do |key, value|
@@ -73,6 +83,12 @@ class PaypalNVP
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     end
 
+    # certificate authentication
+    if cert_auth?
+      http.cert = OpenSSL::X509::Certificate.new(cert)
+      http.key = OpenSSL::PKey::RSA.new(priv_key)
+    end
+
     http.open_timeout = @open_timeout
     http.read_timeout = @read_timeout
 
@@ -89,5 +105,19 @@ class PaypalNVP
       end
     end
     data
+  end
+
+  private
+
+  def cert
+    File.read(@cert_path)
+  end
+
+  def priv_key
+    File.read(@key_path)
+  end
+
+  def cert_auth?
+    !@signature
   end
 end
