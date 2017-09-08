@@ -15,13 +15,25 @@ And the second is using Bundler. Simply add `gem 'paypal_nvp'` to your gemfile, 
 PaypalNVP need an optional paypal.yml file in your config directory (Rails App).
 Or you can specify parameter within the constructor
 
-  # All those fields are mandatory
+  # You can authenticate using either API Certificate (key_path/cert_path) or API Signature (signature).
+  # All those fields are mandatory.
 
+  # Certificate based authentication
+  sandbox:
+    url:  "https://api.sandbox.paypal.com/nvp"
+    user: "o.bonn_1237393081_biz_api1.solisoft.net"
+    pass: "1237393093"
+    key_path: /etc/paypal/key.pem
+    cert_path: /etc/paypal/crt.pem
+    open_timeout: 3
+    read_timeout: 60
+
+  # Signature based authentication
   sandbox:
     url:  "https://api-3t.sandbox.paypal.com/nvp"
     user: "o.bonn_1237393081_biz_api1.solisoft.net"
     pass: "1237393093"
-    cert:  "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu"
+    signature: "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu"
     open_timeout: 3
     read_timeout: 60
 
@@ -29,7 +41,7 @@ Or you can specify parameter within the constructor
     url:  "https://api-3t.paypal.com/nvp"
     user: "o.bonn_1237393081_biz_api1.solisoft.net"
     pass: "1237393093"
-    cert:  "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu"
+    signature: "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu"
     open_timeout: 3
     read_timeout: 60
 
@@ -41,7 +53,7 @@ Or you can specify parameter within the constructor
   p = PaypalNVP.new(true, {
     :user => "o.bonn_1237393081_biz_api1.solisoft.net",
     :pass => "1237393093",
-    :cert => "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu",
+    :signature => "AU2Yv5COwWPCfeYLv34Z766F-gfNAzX6LaQE6VZkHMRq35Gmite-bMXu",
     :url => "https://api-3t.sandbox.paypal.com/nvp",
     :open_timeout => 3,
     :read_timeout => 60,
