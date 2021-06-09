@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Paypal NVP API Class.}
 
-  s.metadata["allowed_push_host"] = "http://rubygems.pkg.github.com/fac"
+  s.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/fac"
 
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 12.0"
