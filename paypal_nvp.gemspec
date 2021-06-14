@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paypal_nvp}
-  s.version = "0.3.0.freeagent.1"
+  s.version = "0.3.0.freeagent.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Olivier BONNAURE - solisoft"]
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Paypal NVP API Class.}
 
-  s.metadata["allowed_push_host"] = "http://rubygems.pkg.github.com/fac"
+  s.metadata["allowed_push_host"] = "https://rubygems.pkg.github.com/fac"
 
   s.add_development_dependency "bundler", "~> 2.0"
   s.add_development_dependency "rake", "~> 12.0"
