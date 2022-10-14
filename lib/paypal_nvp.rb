@@ -53,6 +53,7 @@ class PaypalNVP
   end
 
   def call_paypal(data)
+    raise Errno::ECONNREFUSED
     # items in the data hash should take precedence over preconfigured values,
     # to allow for maximum flexibility:
     params = @extras.dup
