@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paypal_nvp}
-  s.version = "0.3.0.freeagent.3"
+  s.version = "0.3.0.freeagent.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Olivier BONNAURE - solisoft"]
