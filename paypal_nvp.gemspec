@@ -2,17 +2,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paypal_nvp}
-  s.version = "0.3.0.freeagent.4"
+  s.version = "0.3.0.freeagent.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Olivier BONNAURE - solisoft"]
   s.date = %q{2016-04-19}
   s.description = %q{Paypal NVP API Class.}
   s.email = %q{o.bonnaure@solisoft.net}
-  s.extra_rdoc_files = ["lib/paypal_nvp.rb", "README.rdoc"]
-  s.files = ["init.rb", "lib/paypal_nvp.rb", "Rakefile", "README.rdoc", "paypal_nvp.gemspec"]
+  s.extra_rdoc_files = ["lib/paypal_nvp.rb"]
+  s.files = ["init.rb", "lib/paypal_nvp.rb", "Rakefile", "paypal_nvp.gemspec"]
   s.homepage = %q{http://github.com/solisoft/paypal_nvp}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Paypal_nvp", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{paypal_nvp}
   s.rubygems_version = %q{1.7.2}
